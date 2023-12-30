@@ -1,0 +1,6 @@
+*.test.js
+dist
+.eslint
+node_modules
+screens/_legacy/
+src/_old
