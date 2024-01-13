@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Constants from 'expo-constants';
+import { LinearGradient } from 'expo-linear-gradient';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
@@ -25,14 +26,14 @@ import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 
 SplashScreen.preventAutoHideAsync();
 
-const Tab = createBottomTabNavigator();
+const Tab = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 2,
-    justifyContent: 'center',
-  },
+  // container: {
+  //   alignItems: 'center',
+  //   flex: 2,
+  //   justifyContent: 'center',
+  // },
   darkContainer: {
     backgroundColor: '#000',
   },
@@ -45,16 +46,26 @@ const styles = StyleSheet.create({
   lightThemeText: {
     color: '#000',
   },
+  safeAreaBottom: {
+    backgroundColor: '#905fc3',
+    flex: 1,
+  },
   safeAreaDark: {
-    backgroundColor: '#000',
+    // backgroundColor: '#000',
+    backgroundColor: '#905fc3',
     flex: 1,
   },
   safeAreaLight: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
+    backgroundColor: '#905fc3',
     flex: 1,
   },
-  text: {
-    fontFamily: 'Inter_300Light',
+  // text: {
+  //   fontFamily: 'Inter_300Light',
+  // },
+  safeAreaTop: {
+    backgroundColor: '#5b1190',
+    flex: 0,
   },
 });
 
@@ -76,9 +87,15 @@ export default function App() {
   }
   return (
     <AnimatedAppLoader image={{ uri: Constants.expoConfig.splash.image }}>
-      <SafeAreaView style={[styles.safeArea, themeSafeAreaStyle]}>
+      {/* <LinearGradient
+        colors={['#5b1190', '#6c24aa', '#905fc3']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        style={{ flex: 1 }}> */}
+      <SafeAreaView style={styles.safeAreaTop} />
+      <SafeAreaView style={styles.safeAreaBottom}>
         <NavigationContainer>
-          <Tab.Navigator initialRouteName="Home">
+          <Tab.Navigator initialRouteName="Hang" screenOptions={{ animation: 'slide_from_bottom' }}>
             <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Hang" component={HangScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
@@ -86,6 +103,7 @@ export default function App() {
         </NavigationContainer>
         <StatusBar animated style={'auto'} />
       </SafeAreaView>
+      {/* </LinearGradient> */}
     </AnimatedAppLoader>
   );
 }

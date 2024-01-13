@@ -3,104 +3,181 @@ import { Button, Pressable, Text, TextInput, View } from 'react-native';
 
 import styles from './styles';
 
-export default function Scorecard() {
-  const [number1, setNumber1] = useState(null);
-  const [number2, setNumber2] = useState(null);
-  const [number3, setNumber3] = useState(null);
-  const [number4, setNumber4] = useState(null);
-  const [number5, setNumber5] = useState(null);
-  const [number6, setNumber6] = useState(null);
-  const [number7, setNumber7] = useState(null);
-  const [number8, setNumber8] = useState(null);
-  const [number9, setNumber9] = useState(null);
-  const [number10, setNumber10] = useState(null);
-  const [number11, setNumber11] = useState(null);
-  const [number12, setNumber12] = useState(null);
-  const [number13, setNumber13] = useState(null);
+// I think that calculate function needs to be it's own function and there is a useRef for what is currently in each textput input and then they are all added up each time, not just one grand total variable that is added to.
+
+// eslint-disable-next-line react/prop-types
+export default function Scorecard({ playerName, showScore }) {
+  const [number1, setNumber1] = useState(-1);
+  const [number2, setNumber2] = useState(-1);
+  const [number3, setNumber3] = useState(-1);
+  const [number4, setNumber4] = useState(-1);
+  const [number5, setNumber5] = useState(-1);
+  const [number6, setNumber6] = useState(-1);
+  const [number7, setNumber7] = useState(-1);
+  const [number8, setNumber8] = useState(-1);
+  const [number9, setNumber9] = useState(-1);
+  const [number10, setNumber10] = useState(-1);
+  const [number11, setNumber11] = useState(-1);
+  const [number12, setNumber12] = useState(-1);
+  const [number13, setNumber13] = useState(-1);
 
   const [score, setScore] = useState(0);
-  const [show, setShow] = useState(true);
-
-  const handleShow = () => {
-    if (show === true) {
-      setShow(false);
-      console.log('set to hide');
-    } else {
-      setShow(true);
-      console.log('set to show');
-    }
-  };
+  // const [show, setShow] = useState(true);
 
   const handle1change = (number1) => {
+    // if (typeof number1 !== 'number') return;
     setNumber1(number1);
-    setScore(number1);
   };
 
   const handle2change = (number2) => {
     setNumber2(number2);
-    setScore(number2);
   };
 
   const handle3change = (number3) => {
     setNumber3(number3);
-    setScore(number3);
   };
 
   const handle4change = (number4) => {
     setNumber4(number4);
-    setScore(number4);
   };
 
   const handle5change = (number5) => {
     setNumber5(number5);
-    setScore(number5);
   };
 
   const handle6change = (number6) => {
     setNumber6(number6);
-    setScore(number6);
   };
 
   const handle7change = (number7) => {
     setNumber7(number7);
-    setScore(number7);
   };
 
   const handle8change = (number8) => {
     setNumber8(number8);
-    setScore(number8);
   };
 
   const handle9change = (number9) => {
     setNumber9(number9);
-    setScore(number9);
   };
 
   const handle10change = (number10) => {
     setNumber10(number10);
-    setScore(number10);
   };
 
   const handle11change = (number11) => {
     setNumber11(number11);
-    setScore(number11);
   };
 
   const handle12change = (number12) => {
     setNumber12(number12);
-    setScore(number12);
   };
 
   const handle13change = (number13) => {
     setNumber13(number13);
-    setScore(number13);
+  };
+
+  const getScoreTotal = () => {
+    let score1;
+    let score2;
+    let score3;
+    let score4;
+    let score5;
+    let score6;
+    let score7;
+    let score8;
+    let score9;
+    let score10;
+    let score11;
+    let score12;
+    let score13;
+
+    if (parseInt(number1, 10) >= 0) {
+      score1 = parseInt(number1, 10);
+    } else {
+      score1 = 0;
+    }
+    if (parseInt(number2, 10) >= 0) {
+      score2 = parseInt(number2, 10);
+    } else {
+      score2 = 0;
+    }
+    if (parseInt(number3, 10) >= 0) {
+      score3 = parseInt(number3, 10);
+    } else {
+      score3 = 0;
+    }
+    if (parseInt(number4, 10) >= 0) {
+      score4 = parseInt(number4, 10);
+    } else {
+      score4 = 0;
+    }
+    if (parseInt(number5, 10) >= 0) {
+      score5 = parseInt(number5, 10);
+    } else {
+      score5 = 0;
+    }
+    if (parseInt(number6, 10) >= 0) {
+      score6 = parseInt(number6, 10);
+    } else {
+      score6 = 0;
+    }
+    if (parseInt(number7, 10) >= 0) {
+      score7 = parseInt(number7, 10);
+    } else {
+      score7 = 0;
+    }
+    if (parseInt(number8, 10) >= 0) {
+      score8 = parseInt(number8, 10);
+    } else {
+      score8 = 0;
+    }
+    if (parseInt(number9, 10) >= 0) {
+      score9 = parseInt(number9, 10);
+    } else {
+      score9 = 0;
+    }
+    if (parseInt(number10, 10) >= 0) {
+      score10 = parseInt(number10, 10);
+    } else {
+      score10 = 0;
+    }
+    if (parseInt(number11, 10) >= 0) {
+      score11 = parseInt(number11, 10);
+    } else {
+      score11 = 0;
+    }
+    if (parseInt(number12, 10) >= 0) {
+      score12 = parseInt(number12, 10);
+    } else {
+      score12 = 0;
+    }
+    if (parseInt(number13, 10) >= 0) {
+      score13 = parseInt(number13, 10);
+    } else {
+      score13 = 0;
+    }
+
+    return (
+      score1 +
+      score2 +
+      score3 +
+      score4 +
+      score5 +
+      score6 +
+      score7 +
+      score8 +
+      score9 +
+      score10 +
+      score11 +
+      score12 +
+      score13
+    );
   };
 
   return (
-    <>
-      <Pressable style={styles.button} onPress={handleShow}>
-        <Text>{show ? 'Hide Score' : 'Show Score'}</Text>
-      </Pressable>
+    <View>
+      <Text style={styles.nameCard}>{playerName}</Text>
       <View style={styles.container}>
         <TextInput
           style={styles.input}
@@ -109,7 +186,7 @@ export default function Scorecard() {
           placeholder="score"
           keyboardType="numeric"
         />
-        {number1 !== null ? (
+        {number1 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number2) => handle2change(number2)}
@@ -118,7 +195,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number2 !== null ? (
+        {number2 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number3) => handle3change(number3)}
@@ -127,7 +204,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number3 !== null ? (
+        {number3 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number4) => handle4change(number4)}
@@ -136,7 +213,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number4 !== null ? (
+        {number4 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number5) => handle5change(number5)}
@@ -145,7 +222,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number5 !== null ? (
+        {number5 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number6) => handle6change(number6)}
@@ -154,7 +231,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number6 !== null ? (
+        {number6 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number7) => handle7change(number7)}
@@ -163,7 +240,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number7 !== null ? (
+        {number7 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number8) => handle8change(number8)}
@@ -172,7 +249,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number8 !== null ? (
+        {number8 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number9) => handle9change(number9)}
@@ -181,7 +258,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number9 !== null ? (
+        {number9 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number10) => handle10change(number10)}
@@ -190,7 +267,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number10 !== null ? (
+        {number10 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number11) => handle11change(number11)}
@@ -199,7 +276,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number11 !== null ? (
+        {number11 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number12) => handle12change(number12)}
@@ -208,7 +285,7 @@ export default function Scorecard() {
             keyboardType="numeric"
           />
         ) : null}
-        {number12 !== null ? (
+        {number12 >= 0 ? (
           <TextInput
             style={styles.input}
             onChangeText={(number13) => handle13change(number13)}
@@ -218,7 +295,7 @@ export default function Scorecard() {
           />
         ) : null}
       </View>
-      <Text style={styles.text}>{show ? score : null}</Text>
-    </>
+      <Text style={styles.text}>{showScore ? getScoreTotal() : null}</Text>
+    </View>
   );
 }

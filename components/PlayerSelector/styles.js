@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
+  delete_button: {
+    color: '#007AFF',
+    paddingLeft: 5,
+  },
   input: {
     backgroundColor: 'white',
     borderColor: 'white',
@@ -30,19 +34,23 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     shadowColor: 'black',
-    shadowOpacity: 0.56,
-    shadowRadius: 10,
-    // shadowoffset: { width: 5, height: 5 },
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
     width: 80,
   },
-  nameCard: {
-    color: 'white',
-    fontSize: 16,
+  nameList: {
+    color: '#e6352b',
     textAlign: 'center',
   },
+  name_entry: {
+    alignContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   text: {
-    color: 'white',
-    fontSize: 24,
+    color: '#007AFF',
+    padding: 5,
     textAlign: 'center',
   },
 });

@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 2,
     justifyContent: 'center',
+    width: '100%',
   },
   darkContainer: {
     backgroundColor: '#000',
@@ -13,13 +14,18 @@ const styles = StyleSheet.create({
   darkThemeText: {
     color: '#fff',
   },
+  developerButton: {
+    right: 0,
+    top: 0,
+  },
   lightContainer: {
     color: '#000',
   },
   lightThemeText: {
-    color: '#000',
+    color: 'white',
   },
   text: {
+    color: 'white',
     fontFamily: 'Inter_300Light',
   },
 });

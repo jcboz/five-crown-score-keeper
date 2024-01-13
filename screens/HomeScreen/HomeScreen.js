@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
@@ -10,7 +11,9 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import PlayerScores from '../../components/PlayerScores/PlayerScores';
 import Scorecard from '../../components/Scorecard/Scorecard';
 
 const styles = StyleSheet.create({
@@ -31,6 +34,7 @@ const styles = StyleSheet.create({
   lightThemeText: {
     color: '#fff',
   },
+  // eslint-disable-next-line react-native/no-unused-styles
   text: {
     fontFamily: 'Inter_300Light',
   },
@@ -41,18 +45,23 @@ function HomeScreen() {
   const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
   const themeContainerStyle =
     colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
+
+  const route = useRoute();
+  const names = route.params?.names;
   return (
     <LinearGradient
       colors={['#5b1190', '#6c24aa', '#905fc3']}
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
       style={{ flex: 1 }}>
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <View style={[styles.container, themeContainerStyle]}>
-          <Text style={[styles.text, themeTextStyle]}>Five Crown!</Text>
-          <Scorecard />
+          <PlayerScores playersArr={names} />
+          {/* {names.map((name) => {
+            return <Text key={name.index}>{name.name}</Text>;
+          })} */}
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </LinearGradient>
   );
 }
