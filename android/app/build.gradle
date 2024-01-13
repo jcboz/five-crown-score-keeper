@@ -81,7 +81,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.JulianBosley.fiveCrownScoreKeeper'
+    namespace "com.fivecrownscorekeeper"
     defaultConfig {
         applicationId 'com.JulianBosley.fiveCrownScoreKeeper'
         minSdkVersion rootProject.ext.minSdkVersion
