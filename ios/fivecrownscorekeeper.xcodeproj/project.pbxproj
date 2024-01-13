@@ -14,8 +14,8 @@
 		96905EF65AED1B983A6B3ABC /* libPods-fivecrownscorekeeper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-fivecrownscorekeeper.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		A4ABFCE81AD94AA18F10A0ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2883C3B5BA64106866CE0AD /* GoogleService-Info.plist */; };
-		82EFDB436D5F41FEB0EA4D97 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8439A19B9E5434BA5D86458 /* noop-file.swift */; };
+		736EA72F037648D9B6FD43DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B6CF35B52D84FF1A8B7D3B8 /* GoogleService-Info.plist */; };
+		C787E1F6DB2447E38DF593B8 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3206561AC9DE43EB80A12F0F /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,9 +32,9 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-fivecrownscorekeeper/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		D2883C3B5BA64106866CE0AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; name = "GoogleService-Info.plist"; path = "fivecrownscorekeeper/GoogleService-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
-		B8439A19B9E5434BA5D86458 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "fivecrownscorekeeper/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		2C73369E6EE149FF88F8865F /* fivecrownscorekeeper-Bridging-Header.h */ = {isa = PBXFileReference; name = "fivecrownscorekeeper-Bridging-Header.h"; path = "fivecrownscorekeeper/fivecrownscorekeeper-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		4B6CF35B52D84FF1A8B7D3B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; name = "GoogleService-Info.plist"; path = "fivecrownscorekeeper/GoogleService-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
+		3206561AC9DE43EB80A12F0F /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "fivecrownscorekeeper/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		14DED629B6174667A0C8A1FD /* fivecrownscorekeeper-Bridging-Header.h */ = {isa = PBXFileReference; name = "fivecrownscorekeeper-Bridging-Header.h"; path = "fivecrownscorekeeper/fivecrownscorekeeper-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +59,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				D2883C3B5BA64106866CE0AD /* GoogleService-Info.plist */,
-				B8439A19B9E5434BA5D86458 /* noop-file.swift */,
-				2C73369E6EE149FF88F8865F /* fivecrownscorekeeper-Bridging-Header.h */,
+				4B6CF35B52D84FF1A8B7D3B8 /* GoogleService-Info.plist */,
+				3206561AC9DE43EB80A12F0F /* noop-file.swift */,
+				14DED629B6174667A0C8A1FD /* fivecrownscorekeeper-Bridging-Header.h */,
 			);
 			name = fivecrownscorekeeper;
 			sourceTree = "<group>";
@@ -202,8 +202,8 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				A4ABFCE81AD94AA18F10A0ED /* GoogleService-Info.plist in Resources */,
-				7AC6912CED294919A05B52A4 /* fivecrownscorekeeper-Bridging-Header.h in Resources */,
+				736EA72F037648D9B6FD43DF /* GoogleService-Info.plist in Resources */,
+				27D0F925A957432A8E488743 /* fivecrownscorekeeper-Bridging-Header.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +297,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				82EFDB436D5F41FEB0EA4D97 /* noop-file.swift in Sources */,
+				C787E1F6DB2447E38DF593B8 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

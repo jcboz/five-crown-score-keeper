@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "481446588456",
+    "project_id": "five-crown-score-keeper",
+    "storage_bucket": "five-crown-score-keeper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481446588456:android:bad888793b29a0b9e7c51d",
+        "android_client_info": {
+          "package_name": "com.JulianBosley.fiveCrownScoreKeeper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3efqjINVXXt04Tr0ALRV6r0ZaO2VwGFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
