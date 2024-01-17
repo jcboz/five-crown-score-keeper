@@ -29,7 +29,10 @@ function PlayerSelector() {
       return;
     }
     nameIndex.current += 1;
-    setNameList([...nameList, { name: nameRef.current, index: nameIndex.current }]);
+    setNameList([
+      ...nameList,
+      { name: nameRef.current, index: nameIndex.current, isFinished: false },
+    ]);
     setName('');
     nameRef.current = '';
   };
@@ -39,6 +42,10 @@ function PlayerSelector() {
     const copy = nameList.filter((nameEach) => nameEach.index !== names);
     console.log('copy: ', copy);
     setNameList(copy);
+  };
+
+  const handleClearPlayers = () => {
+    setNameList([]);
   };
 
   function handleNavigation() {
@@ -58,10 +65,7 @@ function PlayerSelector() {
       {nameList.map((names) => {
         return (
           <View key={names.index} style={styles.name_entry}>
-            <Text style={styles.nameList}>
-              {names.name}
-              {' ' + names.index}
-            </Text>
+            <Text style={styles.nameList}>{names.name}</Text>
             <Pressable key={names.index} onPress={() => handleDelete(names.index)}>
               <Text style={styles.delete_button}>x</Text>
             </Pressable>
@@ -73,12 +77,17 @@ function PlayerSelector() {
         onChangeText={(name) => handleNameInput(name)}
         value={name}
         placeholder="name"
+        returnKeyType="done"
+        onSubmitEditing={() => handlePlayerAdd()}
       />
       <Pressable onPress={() => handlePlayerAdd()}>
         <Text style={styles.text}>Add Player</Text>
       </Pressable>
       <Pressable onPress={() => handleNavigation()}>
         <Text style={styles.text}>Start!</Text>
+      </Pressable>
+      <Pressable onPress={() => handleClearPlayers()}>
+        <Text style={styles.text}>Clear Players!</Text>
       </Pressable>
     </View>
   );

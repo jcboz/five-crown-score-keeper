@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import Scorecard from '../Scorecard/Scorecard';
 import styles from './styles';
@@ -9,21 +9,12 @@ PlayerScores.prototype = {
   playersArr: Array,
 };
 // eslint-disable-next-line react/prop-types
-export default function PlayerScores({ playersArr }) {
+export default function PlayerScores({ playersArr, testFunc, testBool, scoreFun, scoreArr }) {
   const [players, setPlayers] = useState([]);
   const [show, setShow] = useState(true);
   const [playersLoaded, setPlayersLoaded] = useState(false);
   // playerscores needs to get list of names from PlayerSelector
   const navigation = useNavigation();
-
-  const getNumPlayers = () => {
-    // eslint-disable-next-line array-callback-return, react/prop-types
-    playersArr.map((player) => {
-      setPlayers([...players, <Scorecard playerName={player.name} />]);
-    });
-    console.log('players: ', players);
-    setPlayersLoaded(true);
-  };
 
   const handleShow = () => {
     if (show === true) {
@@ -52,14 +43,30 @@ export default function PlayerScores({ playersArr }) {
           <Text style={styles.buttonText}>{'New Game'}</Text>
         </Pressable>
       </View>
-      <View style={styles.container}>
+      <ScrollView
+        horizontal
+        centerContent
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.container}>
         {
           // eslint-disable-next-line react/prop-types
           playersArr.map((player) => {
-            return <Scorecard key={player.name} playerName={player.name} showScore={show} />;
+            return (
+              <Scorecard
+                key={player.name}
+                playerName={player.name}
+                index={player.index}
+                isFinished={player.isFinished}
+                showScore={show}
+                testFunc={(index) => testFunc(index)}
+                testBool={testBool}
+                scoreFun={(index, score) => scoreFun(index, score)}
+                scoreArr={scoreArr}
+              />
+            );
           })
         }
-      </View>
+      </ScrollView>
     </View>
   );
 }

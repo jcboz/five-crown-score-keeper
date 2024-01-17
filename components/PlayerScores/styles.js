@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    // flexGrow: 1,
+    // justifyContent: 'center',
   },
   delete_button: {
     color: '#007AFF',

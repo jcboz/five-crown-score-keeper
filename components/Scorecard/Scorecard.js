@@ -6,7 +6,20 @@ import styles from './styles';
 // I think that calculate function needs to be it's own function and there is a useRef for what is currently in each textput input and then they are all added up each time, not just one grand total variable that is added to.
 
 // eslint-disable-next-line react/prop-types
-export default function Scorecard({ playerName, showScore }) {
+export default function Scorecard({
+  // eslint-disable-next-line react/prop-types
+  playerName,
+  // eslint-disable-next-line react/prop-types
+  index,
+  // eslint-disable-next-line react/prop-types
+  showScore,
+  // eslint-disable-next-line react/prop-types
+  testFunc,
+  // eslint-disable-next-line react/prop-types
+  scoreFun,
+  // eslint-disable-next-line react/prop-types
+  scoreArr,
+}) {
   const [number1, setNumber1] = useState(-1);
   const [number2, setNumber2] = useState(-1);
   const [number3, setNumber3] = useState(-1);
@@ -75,6 +88,7 @@ export default function Scorecard({ playerName, showScore }) {
 
   const handle13change = (number13) => {
     setNumber13(number13);
+    console.log('how many times does this get called');
   };
 
   const getScoreTotal = () => {
@@ -158,7 +172,7 @@ export default function Scorecard({ playerName, showScore }) {
       score13 = 0;
     }
 
-    return (
+    const tot =
       score1 +
       score2 +
       score3 +
@@ -171,9 +185,68 @@ export default function Scorecard({ playerName, showScore }) {
       score10 +
       score11 +
       score12 +
-      score13
-    );
+      score13;
+
+    scoreFun(index, tot);
+
+    return tot;
   };
+
+  function checkIfFinished(
+    score1,
+    score2,
+    score3,
+    score4,
+    score5,
+    score6,
+    score7,
+    score8,
+    score9,
+    score10,
+    score11,
+    score12,
+    score13,
+  ) {
+    if (
+      score1 >= 0 &&
+      score2 >= 0 &&
+      score3 >= 0 &&
+      score4 >= 0 &&
+      score5 >= 0 &&
+      score6 >= 0 &&
+      score7 >= 0 &&
+      score8 >= 0 &&
+      score9 >= 0 &&
+      score10 >= 0 &&
+      score11 >= 0 &&
+      score12 >= 0 &&
+      score13 >= 0
+    ) {
+      // isFinished = true;
+      console.log('index from Scorecard: ', index);
+      testFunc(index);
+    }
+  }
+
+  function handleFinish() {
+    if (number13.prev !== number13) {
+      checkIfFinished(
+        number1,
+        number2,
+        number3,
+        number4,
+        number5,
+        number6,
+        number7,
+        number8,
+        number9,
+        number10,
+        number11,
+        number12,
+        number13,
+      );
+    }
+  }
 
   return (
     <View>
@@ -289,6 +362,7 @@ export default function Scorecard({ playerName, showScore }) {
           <TextInput
             style={styles.input}
             onChangeText={(number13) => handle13change(number13)}
+            onEndEditing={() => handleFinish()}
             value={number13}
             placeholder="score"
             keyboardType="numeric"
