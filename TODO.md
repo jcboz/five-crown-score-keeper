@@ -2,7 +2,7 @@
 
 ## Aesthetic:
 
-- [ ] Redesign 'players screen'
+- [ ] Align to Figma storyboard
 - [ ] Possible add nav bar at bottom?? >> | game | players | settings/profile |
 - [x] Create app logo
 - [x] Change display name on device homescreen
@@ -14,10 +14,10 @@
 ## Functional:
 
 - [ ] (Don't add this) Have players reset when 'new game' is hit!! (passing in an empty array from playerscores)
-- [ ] Add 'clear all' button on player selector screen
+- [x] Add 'clear all' button on player selector screen
 - [ ] Handle case where there is a tie
 
 ## Devops:
 
-- [ ] !!Add database
+- [ ] Add local storage with https://docs.expo.dev/versions/latest/sdk/securestore/
 - [ ] Create app distribution system

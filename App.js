@@ -22,7 +22,8 @@ import {
 import AnimatedAppLoader from './components/AnimatedAppLoader/AnimatedAppLoader';
 import HangScreen from './screens/HangScreen/HangScreen';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
-import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import SettingsScreen from './screens/SettingsScreen/SettingsScreen';
+import StartScreen from './screens/StartScreen/StartScreen';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -95,10 +96,17 @@ export default function App() {
       <SafeAreaView style={styles.safeAreaTop} />
       <SafeAreaView style={styles.safeAreaBottom}>
         <NavigationContainer>
-          <Tab.Navigator initialRouteName="Hang" screenOptions={{ animation: 'slide_from_bottom' }}>
+          <Tab.Navigator
+            initialRouteName="Start"
+            screenOptions={{ animation: 'slide_from_bottom' }}>
+            <Tab.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Hang" component={HangScreen} options={{ headerShown: false }} />
-            <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+            <Tab.Screen
+              name="Settings"
+              component={SettingsScreen}
+              options={{ headerShown: false }}
+            />
           </Tab.Navigator>
         </NavigationContainer>
         <StatusBar animated style={'auto'} />
