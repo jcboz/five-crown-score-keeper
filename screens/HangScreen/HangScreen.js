@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 
+import NavButtons from '../../components/NavButtons/NavButtons';
 import PlayerSelector from '../../components/PlayerSelector/PlayerSelector';
 import styles from './styles';
 
@@ -27,6 +28,7 @@ function HangScreen() {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
       style={{ flex: 1 }}>
+      <NavButtons leftText={'Menu'} leftNav={'Start'} rightNav={'Home'} />
       <View style={[styles.container, themeContainerStyle]}>
         <Text style={[styles.text, themeTextStyle]}>Players:</Text>
         <PlayerSelector />
