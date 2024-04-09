@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 
 import AnimatedAppLoader from './components/AnimatedAppLoader/AnimatedAppLoader';
+import GameScreen from './screens/GameScreen/GameScreen';
 import HangScreen from './screens/HangScreen/HangScreen';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen/SettingsScreen';
@@ -102,6 +103,7 @@ export default function App() {
             <Tab.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Tab.Screen name="Hang" component={HangScreen} options={{ headerShown: false }} />
+            <Tab.Screen name="Game" component={GameScreen} options={{ headerShown: false }} />
             <Tab.Screen
               name="Settings"
               component={SettingsScreen}

@@ -112,7 +112,7 @@ function StartScreen() {
             <Text style={styles.button_text}>Keep Score</Text>
           </Pressable>
           <Pressable
-            onPress={() => navigation.navigate('Hang')}
+            onPress={() => navigation.navigate('Game')}
             style={({ pressed }) => [
               {
                 backgroundColor: pressed ? '#D3D3D3' : 'white',
