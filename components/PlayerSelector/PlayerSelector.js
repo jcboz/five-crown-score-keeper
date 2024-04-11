@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import { Alert, Platform, Pressable, Text, TextInput, ToastAndroid, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
@@ -14,6 +14,9 @@ function PlayerSelector() {
   const [nameList, setNameList] = useState([]);
 
   const navigation = useNavigation();
+
+  const route = useRoute();
+  const path = route.params?.path;
 
   const isWhitespaceString = (str) => {
     return !str.replace(/\s/g, '').length;
@@ -56,7 +59,8 @@ function PlayerSelector() {
       nameArr.push(names);
     });
     console.log('nameArr: ', nameArr);
-    if (nameArr.length >= 2) navigation.navigate('Home', { names: nameArr });
+    if (nameArr.length >= 2 && path === 0) navigation.navigate('Home', { names: nameArr });
+    else if (nameArr.length >= 2 && path === 1) navigation.navigate('Game', { names: nameArr });
     else Alert.alert('You must enter at least 2 players!');
   }
 

@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
@@ -22,6 +22,8 @@ function HangScreen() {
   const themeContainerStyle =
     colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
+  const route = useRoute();
+  const path = route.params?.path;
   return (
     <LinearGradient
       colors={['#5b1190', '#6c24aa', '#905fc3']}
@@ -31,7 +33,7 @@ function HangScreen() {
       <NavButtons leftText={'Menu'} leftNav={'Start'} rightNav={'Home'} />
       <View style={[styles.container, themeContainerStyle]}>
         <Text style={[styles.text, themeTextStyle]}>Players:</Text>
-        <PlayerSelector />
+        <PlayerSelector path={path} />
       </View>
     </LinearGradient>
   );

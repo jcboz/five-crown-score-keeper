@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
+import { useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 
 import PlayerView from '../../components/PlayerView/PlayerView';
@@ -8,13 +9,21 @@ import deck from './deck';
 import styles from './styles';
 
 export default function GameScreen() {
-  const [players, setPlayers] = useState([
-    { id: 0, name: 'Julian', score: 0, hand: [] },
-    { id: 1, name: 'Grace', score: 0, hand: [] },
-  ]);
+  const route = useRoute();
+  const names = route.params?.names;
+
+  const [players, setPlayers] = useState(() => initPlayers());
   const [round, setRound] = useState(1);
   const [currentDeck, setCurrentDeck] = useState(deck);
   const [readyToDeal, setReadyToDeal] = useState(true);
+
+  function initPlayers() {
+    const players = [];
+    for (let i = 0; i < names.length; i++) {
+      players.push({ id: i, name: names[i].name, hand: [] });
+    }
+    return players;
+  }
 
   function deal() {
     if (readyToDeal) {

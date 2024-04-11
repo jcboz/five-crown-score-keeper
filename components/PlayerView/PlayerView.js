@@ -47,7 +47,7 @@ export default function PlayerView({ players }) {
   return (
     <View style={styles.container}>
       {players.map((player) => (
-        <View style={styles.player}>
+        <View key={player.id} style={styles.player}>
           <Text key={player.id} style={styles.text}>
             {player.name + ', your cards are: ' + player.hand}
           </Text>
