@@ -15,9 +15,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 10,
+    marginBottom: 10,
+  },
+  player: {
+    marginBottom: 10,
   },
   text: {
     color: 'white',

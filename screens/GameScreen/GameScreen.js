@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useRef, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Alert, Pressable, Text, View } from 'react-native';
 
 import PlayerView from '../../components/PlayerView/PlayerView';
 import deck from './deck';
@@ -14,29 +14,30 @@ export default function GameScreen() {
   ]);
   const [round, setRound] = useState(1);
   const [currentDeck, setCurrentDeck] = useState(deck);
+  const [readyToDeal, setReadyToDeal] = useState(true);
 
   function deal() {
-    for (let i = 0; i < round + 2; i++) {
-      for (let j = 0; j < players.length; j++) {
-        const rand = Math.floor(Math.random() * currentDeck.length);
-        console.log('players length: ', players.length);
-        setPlayers([...players], players[j].hand.push(currentDeck[rand]));
-        console.log('new hand: ', players[j].hand);
-        currentDeck.splice(rand, 1);
-        console.log('currentDeck: ', currentDeck);
-        setCurrentDeck([...currentDeck]);
+    if (readyToDeal) {
+      for (let i = 0; i < round + 2; i++) {
+        for (let j = 0; j < players.length; j++) {
+          const rand = Math.floor(Math.random() * currentDeck.length);
+          setPlayers([...players], players[j].hand.push(currentDeck[rand]));
+          currentDeck.splice(rand, 1);
+          setCurrentDeck([...currentDeck]);
+        }
       }
+      setReadyToDeal(false);
+    } else {
+      Alert.alert("Round isn't over");
     }
-    console.log('players: ', players);
   }
 
   function newRound() {
-    console.log('next round pressed');
+    setReadyToDeal(true);
     setRound(round + 1);
     for (let j = 0; j < players.length; j++) {
       setPlayers([...players], players[j].hand.splice(0, players[j].hand.length));
     }
-    console.log(players);
   }
 
   return (
@@ -45,16 +46,8 @@ export default function GameScreen() {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
       style={{ flex: 1 }}>
-      {players.map((player) => (
-        <PlayerView
-          key={player.id}
-          id={player.id}
-          name={player.name}
-          score={player.score}
-          hand={player.hand}
-        />
-      ))}
-      <Text>
+      <PlayerView players={players} />
+      <Text style={styles.text}>
         It is round {round}. The deck is: {currentDeck}
       </Text>
       <View style={styles.container}>
