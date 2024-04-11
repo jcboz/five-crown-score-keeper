@@ -17,6 +17,7 @@ export default function GameScreen() {
   const [round, setRound] = useState(1);
   const [currentDeck, setCurrentDeck] = useState(deck);
   const [readyToDeal, setReadyToDeal] = useState(true);
+  const [faceUpCard, setFaceUpCard] = useState();
 
   function initPlayers() {
     const players = [];
@@ -36,6 +37,10 @@ export default function GameScreen() {
           setCurrentDeck([...currentDeck]);
         }
       }
+      const rand = Math.floor(Math.random() * currentDeck.length);
+      console.log(currentDeck[rand]);
+      setFaceUpCard(currentDeck[rand]);
+      currentDeck.splice(rand, 1);
       setReadyToDeal(false);
     } else {
       Alert.alert("Round isn't over");
@@ -60,6 +65,7 @@ export default function GameScreen() {
       <Text style={styles.text}>
         It is round {round}. The deck is: {currentDeck}
       </Text>
+      <Text style={styles.textFaceUpCard}>The face up card is {faceUpCard}</Text>
       <View style={styles.container}>
         <Pressable onPress={() => deal()} style={styles.button}>
           <Text style={styles.buttonText}>Deal Cards</Text>

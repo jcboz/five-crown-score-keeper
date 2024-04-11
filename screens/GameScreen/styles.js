@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Inter_300Light',
   },
+  textFaceUpCard: {
+    color: 'white',
+    fontFamily: 'Inter_300Light',
+    marginTop: 10,
+  },
 });
 
 export default styles;
