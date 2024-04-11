@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
   },
+  playersView: {
+    marginBottom: 25,
+  },
   text: {
     color: 'white',
     fontFamily: 'Inter_300Light',

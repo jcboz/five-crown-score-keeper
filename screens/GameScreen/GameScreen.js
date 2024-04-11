@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 
 import PlayerView from '../../components/PlayerView/PlayerView';
+import canGoOut from './canGoOut';
 import deck from './deck';
 import styles from './styles';
 
@@ -65,6 +66,9 @@ export default function GameScreen() {
         </Pressable>
         <Pressable onPress={() => newRound()} style={styles.button}>
           <Text style={styles.buttonText}>Next Round</Text>
+        </Pressable>
+        <Pressable onPress={() => canGoOut(round, players)} style={styles.button}>
+          <Text style={styles.buttonText}>Check Hand</Text>
         </Pressable>
       </View>
     </LinearGradient>
