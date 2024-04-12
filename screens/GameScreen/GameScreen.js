@@ -8,7 +8,6 @@ import PlayerView from '../../components/PlayerView/PlayerView';
 import canGoOut from './canGoOut';
 import deck from './deck';
 import styles from './styles';
-import testdeck from './testdeck';
 
 export default function GameScreen() {
   const route = useRoute();
@@ -16,7 +15,7 @@ export default function GameScreen() {
 
   const [players, setPlayers] = useState(() => initPlayers());
   const [round, setRound] = useState(1);
-  const [currentDeck, setCurrentDeck] = useState(testdeck);
+  const [currentDeck, setCurrentDeck] = useState(deck);
   const [readyToDeal, setReadyToDeal] = useState(true);
   const [faceUpCard, setFaceUpCard] = useState(null);
 
@@ -39,6 +38,7 @@ export default function GameScreen() {
         }
       }
       const rand = Math.floor(Math.random() * currentDeck.length);
+      console.log('Julian check here', currentDeck[rand]);
       setFaceUpCard(currentDeck[rand]);
       currentDeck.splice(rand, 1);
       setReadyToDeal(false);
@@ -61,25 +61,27 @@ export default function GameScreen() {
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
       style={{ flex: 1 }}>
-      <PlayerView players={players} />
-      <Text style={styles.text}>
-        It is round {round}. {'\n'}The deck is:{'\n'}
-        {currentDeck.map((card) => card.value + ' of ' + card.suite + 's, ')}
-      </Text>
-      <Text style={styles.textFaceUpCard}>
-        The face up card is{' '}
-        {faceUpCard !== null ? faceUpCard.value + ' of ' + faceUpCard.suite + 's' : ''}
-      </Text>
-      <View style={styles.container}>
-        <Pressable onPress={() => deal()} style={styles.button}>
-          <Text style={styles.buttonText}>Deal Cards</Text>
-        </Pressable>
-        <Pressable onPress={() => newRound()} style={styles.button}>
-          <Text style={styles.buttonText}>Next Round</Text>
-        </Pressable>
-        <Pressable onPress={() => canGoOut(round, players)} style={styles.button}>
-          <Text style={styles.buttonText}>Check Hand</Text>
-        </Pressable>
+      <View style={styles.outerContainer}>
+        <Text style={styles.text}>
+          It is round {round}. {'\n'}The deck is:{'\n'}
+          {currentDeck.map((card) => card.value + ' of ' + card.suite + 's, ')}
+        </Text>
+        <Text style={styles.textFaceUpCard}>
+          The face up card is{' '}
+          {faceUpCard !== null ? faceUpCard.value + ' of ' + faceUpCard.suite : ''}
+        </Text>
+        <View style={styles.container}>
+          <Pressable onPress={() => deal()} style={styles.button}>
+            <Text style={styles.buttonText}>Deal Cards</Text>
+          </Pressable>
+          <Pressable onPress={() => newRound()} style={styles.button}>
+            <Text style={styles.buttonText}>Next Round</Text>
+          </Pressable>
+          <Pressable onPress={() => canGoOut(round, players)} style={styles.button}>
+            <Text style={styles.buttonText}>Check Hand</Text>
+          </Pressable>
+        </View>
+        <PlayerView style={styles.playerView} players={players} />
       </View>
     </LinearGradient>
   );

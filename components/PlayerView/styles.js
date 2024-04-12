@@ -14,8 +14,14 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
   },
+  cards: {
+    flexDirection: 'row',
+  },
   container: {
+    bottom: 0,
+    flexDirection: 'column',
     marginBottom: 10,
+    position: 'absolute',
   },
   player: {
     marginBottom: 10,
@@ -23,6 +29,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontFamily: 'Inter_300Light',
+    fontSize: 16,
   },
 });
 

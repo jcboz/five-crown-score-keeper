@@ -19,8 +19,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
   },
-  playersView: {
-    marginBottom: 25,
+  outerContainer: {
+    flex: 1,
+    height: '100%',
+  },
+  playerView: {
+    bottom: 0,
   },
   text: {
     color: 'white',
