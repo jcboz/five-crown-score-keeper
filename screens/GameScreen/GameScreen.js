@@ -17,7 +17,7 @@ export default function GameScreen() {
   const [round, setRound] = useState(1);
   const [currentDeck, setCurrentDeck] = useState(deck);
   const [readyToDeal, setReadyToDeal] = useState(true);
-  const [faceUpCard, setFaceUpCard] = useState();
+  const [faceUpCard, setFaceUpCard] = useState(null);
 
   function initPlayers() {
     const players = [];
@@ -38,7 +38,7 @@ export default function GameScreen() {
         }
       }
       const rand = Math.floor(Math.random() * currentDeck.length);
-      console.log(currentDeck[rand]);
+      console.log('Julian check here', currentDeck[rand]);
       setFaceUpCard(currentDeck[rand]);
       currentDeck.splice(rand, 1);
       setReadyToDeal(false);
@@ -63,9 +63,13 @@ export default function GameScreen() {
       style={{ flex: 1 }}>
       <PlayerView players={players} />
       <Text style={styles.text}>
-        It is round {round}. The deck is: {currentDeck}
+        It is round {round}. {'\n'}The deck is:{'\n'}
+        {currentDeck.map((card) => card.value + ' of ' + card.suite + 's, ')}
       </Text>
-      <Text style={styles.textFaceUpCard}>The face up card is {faceUpCard}</Text>
+      <Text style={styles.textFaceUpCard}>
+        The face up card is{' '}
+        {faceUpCard !== null ? faceUpCard.value + ' of ' + faceUpCard.suite + 's' : ''}
+      </Text>
       <View style={styles.container}>
         <Pressable onPress={() => deal()} style={styles.button}>
           <Text style={styles.buttonText}>Deal Cards</Text>
