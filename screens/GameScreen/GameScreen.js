@@ -8,6 +8,7 @@ import PlayerView from '../../components/PlayerView/PlayerView';
 import canGoOut from './canGoOut';
 import deck from './deck';
 import styles from './styles';
+import testdeck from './testdeck';
 
 export default function GameScreen() {
   const route = useRoute();
@@ -15,7 +16,7 @@ export default function GameScreen() {
 
   const [players, setPlayers] = useState(() => initPlayers());
   const [round, setRound] = useState(1);
-  const [currentDeck, setCurrentDeck] = useState(deck);
+  const [currentDeck, setCurrentDeck] = useState(testdeck);
   const [readyToDeal, setReadyToDeal] = useState(true);
   const [faceUpCard, setFaceUpCard] = useState(null);
 
@@ -38,7 +39,6 @@ export default function GameScreen() {
         }
       }
       const rand = Math.floor(Math.random() * currentDeck.length);
-      console.log('Julian check here', currentDeck[rand]);
       setFaceUpCard(currentDeck[rand]);
       currentDeck.splice(rand, 1);
       setReadyToDeal(false);

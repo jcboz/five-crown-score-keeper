@@ -1,13 +1,20 @@
+/* eslint-disable eqeqeq */
 export default function canGoOut(round, players) {
   const wildCard = round + 2;
   const cards = round + 2;
 
+  for (let i = 0; i < players.length; i++) {
+    checkHand(players[i].hand, cards);
+  }
+}
+
+function checkHand(hand, cards) {
   const subHands = initSubHands(cards);
 
-  console.log('check this jUlian: ', subHands);
-
-  for (let i = 0; i < players.length; i++) {
-    // players[i].hand;
+  for (let i = 0; i < hand.length; i++) {
+    if (addToSubHand(hand[i], subHands)) {
+      removeCardFromHand(hand, i);
+    }
   }
 }
 
@@ -16,8 +23,41 @@ function isSet() {}
 
 function isRun() {}
 
-function removeCard(hand, index) {
+function addToSubHand(card, subHands) {
+  for (let i = 0; i < subHands.length; i++) {
+    // There is a subhand with one card and the card number matches
+    if (
+      subHands[i].type === 'open' &&
+      subHands[i].cards.length > 0 &&
+      subHands[i].cards[0].value == card.value
+    ) {
+      subHands[i].cards.push(card);
+      subHands[i].type = 'set';
+      console.log('There is a subhand started and the card number matches: ', subHands[i]);
+      return true;
+    }
+    // There is a subhand with multiple cards with type set
+    if (
+      subHands[i].type === 'set' &&
+      subHands[i].cards.length > 0 &&
+      subHands[i].cards[0].value == card.value
+    ) {
+      subHands[i].cards.push(card);
+      console.log('There is a subhand set going and the card number matches: ', subHands[i]);
+      return true;
+    }
+    // There are no cards in any of the subhands yet
+    if (subHands[i].type === 'open' && subHands[i].cards.length == 0) {
+      subHands[i].cards.push(card);
+      console.log('There are no cards in any of the subhands yet: ', subHands[i]);
+      return true;
+    }
+  }
+}
+
+function removeCardFromHand(hand, index) {
   hand.splice(index, 1);
+  console.log('newhand: ', hand);
 }
 
 function initSubHands(cards) {
