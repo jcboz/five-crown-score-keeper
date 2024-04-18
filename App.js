@@ -7,7 +7,7 @@ import Constants from 'expo-constants';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 
 import AnimatedAppLoader from './components/AnimatedAppLoader/AnimatedAppLoader';
 import GameScreen from './screens/GameScreen/GameScreen';
@@ -35,6 +35,7 @@ export default function App() {
       <SafeAreaView style={styles.safeAreaTop} />
       <SafeAreaView style={styles.safeAreaBottom}>
         <NavigationContainer>
+          <Text>Hello! This is a test</Text>
           <Tab.Navigator
             initialRouteName="Start"
             screenOptions={{ animation: 'slide_from_bottom' }}>
