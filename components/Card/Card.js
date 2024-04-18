@@ -1,19 +1,11 @@
 import React from 'react';
-import { ImageBackground, Text, View } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
-import Animated, {
-  useAnimatedGestureHandler,
-  useAnimatedReaction,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { Text, View } from 'react-native';
 
 import styles from './styles';
-import { getOrder, getPosition, MARGIN } from './utils';
 
 export default function Card(card) {
-  let color = 'red';
+  console.log('card from Card: ', card.card.value);
+  let color = 'pink';
   if (card.card.suite === 'club') {
     color = 'green';
   } else if (card.card.suite === 'heart') {
@@ -22,9 +14,12 @@ export default function Card(card) {
     color = '#FFD600';
   } else if (card.card.suite === 'diamond') {
     color = 'blue';
+  } else if (card.card.suite === 'joker') {
+    color = 'pink';
+  } else if (card.card.suite === 'spade') {
+    color = 'black';
   }
   const backgroundColor = color;
-
   return (
     <View style={styles.container}>
       <Text style={[styles.value, { color }]}>{card.card.value}</Text>

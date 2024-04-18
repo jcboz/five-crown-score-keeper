@@ -32,7 +32,7 @@ export default function GameScreen() {
       for (let i = 0; i < round + 2; i++) {
         for (let j = 0; j < players.length; j++) {
           const rand = Math.floor(Math.random() * currentDeck.length);
-          setPlayers([...players], players[j].hand.push(currentDeck[rand]));
+          setPlayers([...players], players[j].hand.push({ card: currentDeck[rand], id: i }));
           currentDeck.splice(rand, 1);
           setCurrentDeck([...currentDeck]);
         }
@@ -77,10 +77,8 @@ export default function GameScreen() {
           <Pressable onPress={() => newRound()} style={styles.button}>
             <Text style={styles.buttonText}>Next Round</Text>
           </Pressable>
-          <Pressable onPress={() => canGoOut(round, players)} style={styles.button}>
-            <Text style={styles.buttonText}>Check Hand</Text>
-          </Pressable>
         </View>
+        <View style={styles.subHand} />
         <PlayerView style={styles.playerView} players={players} />
       </View>
     </LinearGradient>

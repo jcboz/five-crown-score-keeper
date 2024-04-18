@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginBottom: 10,
     position: 'absolute',
+    width: '100%',
   },
   player: {
     marginBottom: 10,

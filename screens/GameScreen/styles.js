@@ -20,11 +20,21 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   outerContainer: {
+    alignContent: 'center',
+    alignItems: 'center',
     flex: 1,
     height: '100%',
   },
   playerView: {
     bottom: 0,
+  },
+  subHand: {
+    backgroundColor: 'black',
+    borderRadius: 15,
+    height: 130,
+    opacity: 0.5,
+    top: 40,
+    width: '80%',
   },
   text: {
     color: 'white',
