@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+// * there are 58 cards total
+
 const deck = [
   { suite: 'club', value: 3 },
   { suite: 'club', value: 4 },

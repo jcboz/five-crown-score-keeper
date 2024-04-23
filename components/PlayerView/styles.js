@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   cards: {
-    flexDirection: 'row',
+    bottom: 129,
   },
   container: {
     bottom: 0,
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
+    bottom: 135,
     color: 'white',
     fontFamily: 'Inter_300Light',
     fontSize: 16,

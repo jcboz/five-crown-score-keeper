@@ -4,26 +4,26 @@ import { Text, View } from 'react-native';
 import styles from './styles';
 
 export default function Card(card) {
-  console.log('card from Card: ', card.card.value);
+  // console.log('card from Card: ', card.item.value);
   let color = 'pink';
-  if (card.card.suite === 'club') {
+  if (card.item.suite === 'club') {
     color = 'green';
-  } else if (card.card.suite === 'heart') {
+  } else if (card.item.suite === 'heart') {
     color = 'red';
-  } else if (card.card.suite === 'star') {
+  } else if (card.item.suite === 'star') {
     color = '#FFD600';
-  } else if (card.card.suite === 'diamond') {
+  } else if (card.item.suite === 'diamond') {
     color = 'blue';
-  } else if (card.card.suite === 'joker') {
+  } else if (card.item.suite === 'joker') {
     color = 'pink';
-  } else if (card.card.suite === 'spade') {
+  } else if (card.item.suite === 'spade') {
     color = 'black';
   }
   const backgroundColor = color;
   return (
     <View style={styles.container}>
-      <Text style={[styles.value, { color }]}>{card.card.value}</Text>
-      <Text style={[styles.value2, { color }]}>{card.card.value}</Text>
+      <Text style={[styles.value, { color }]}>{card.item.value}</Text>
+      <Text style={[styles.value2, { color }]}>{card.item.value}</Text>
       <View style={[styles.shape, { backgroundColor }]} />
     </View>
   );
