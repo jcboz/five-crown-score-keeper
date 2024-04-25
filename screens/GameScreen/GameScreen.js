@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 
+import Card from '../../components/Card/Card';
 import PlayerView from '../../components/PlayerView/PlayerView';
 import canGoOut from './canGoOut';
 import deck from './deck';
