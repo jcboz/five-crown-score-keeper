@@ -21,11 +21,12 @@ export default function GameScreen() {
   const [readyToDeal, setReadyToDeal] = useState(true);
   const [faceUpCard, setFaceUpCard] = useState(null);
   const [tlayout, setLayout] = useState([]);
+  const [subHandValid, setSubHandValid] = useState(false);
 
   function initPlayers() {
     const players = [];
     for (let i = 0; i < names.length; i++) {
-      players.push({ id: i, name: names[i].name, hand: [] });
+      players.push({ id: i, name: names[i].name, hand: [], subHand: [] });
     }
     return players;
   }
@@ -40,29 +41,23 @@ export default function GameScreen() {
             tempDeck = shuffle(tempDeck);
           }
           const rand = Math.floor(Math.random() * tempDeck.length);
-          // setPlayers([...players], players[j].hand.push({ card: tempDeck[rand], id: i }));
           tempPlayers[j].hand.push({ card: tempDeck[rand], id: i });
           tempDeck.splice(rand, 1);
-          // setCurrentDeck([...currentDeck]);
         }
       }
       const rand = Math.floor(Math.random() * tempDeck.length);
-      // console.log('Julian check here', currentDeck[rand]);
       setFaceUpCard(tempDeck[rand]);
       tempDeck.splice(rand, 1);
       setCurrentDeck(tempDeck);
       setPlayers([...tempPlayers]);
-      console.log('ets see... ', currentDeck);
       setReadyToDeal(false);
     } else {
       Alert.alert("Round isn't over");
     }
-    console.log('both hands: ', players[0].hand, players[1].hand);
   }
 
   function shuffle(tempDeck) {
     tempDeck = discardPile;
-    console.log('moments like these: ', tempDeck);
     setDiscardPile([]);
     return tempDeck;
   }
@@ -80,6 +75,15 @@ export default function GameScreen() {
     t.push(faceUpCard);
     setDiscardPile(t);
     setFaceUpCard(null);
+  }
+
+  function checkHand() {
+    if (subHandValid) {
+      console.log('you can go out!');
+    } else {
+      console.log("You can't go out");
+    }
+    console.log('players: ', players[0]);
   }
 
   return (
@@ -108,11 +112,13 @@ export default function GameScreen() {
           <Pressable onPress={() => newRound()} style={styles.button}>
             <Text style={styles.buttonText}>Next Round</Text>
           </Pressable>
+          <Pressable onPress={() => checkHand()} style={styles.button}>
+            <Text style={styles.buttonText}>Check Subhand</Text>
+          </Pressable>
         </View>
         <View
           onLayout={(event) => {
             event.target.measure((x, y, width, height, pageX, pageY) => {
-              // console.log('x, y, width, height, pageX, pageY: ', x, y, width, height, pageX, pageY);
               const t = tlayout;
               t.push({ x, y, width, height, pageX, pageY });
               setLayout(t);
@@ -123,6 +129,7 @@ export default function GameScreen() {
         <PlayerView
           style={styles.playerView}
           players={players}
+          setPlayers={setPlayers}
           round={round + 2}
           layout={tlayout}
         />
