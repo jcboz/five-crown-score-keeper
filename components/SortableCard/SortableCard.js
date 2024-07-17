@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import { StyleSheet } from 'react-native';
 import { PanGestureHandler, PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import Animated, {
+  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useDerivedValue,
@@ -79,9 +80,39 @@ function SortableCard({ offsets, index, children, players, setPlayers, container
       );
       translation.y.value = withSpring(offset.y.value, { velocity: velocityY });
       isGestureActive.value = false;
-      console.log('offsets: ', offset);
-      console.log('offset: ', offset.order.value);
-      console.log('children: ', children.props);
+      // console.log('offsets: ', offset);
+      // console.log('offset: ', offset.order.value);
+      // console.log('children: ', children.props);
+      const tplayers = players;
+      if (
+        between(translation.x.value, offset.x.value, offset.x.value + offset.width.value) &&
+        between(translation.y.value, offset.y.value - CARD_HEIGHT, offset.y.value)
+      ) {
+        // Here add the cards into the player's subhand. Make sure to take them out when they are moved out. In GameView, a function will need to check the values of the player's subhands
+        // setPlayers([...players], players[???]); // i think we could pass the player index based on who's turn it is... is there a turn keeper yet?
+        //
+        console.log('card: ', children.props.item);
+        console.log('subhand', tplayers[0].subHand[0]);
+        console.log('index', tplayers[0].subHand.indexOf(children.props.item));
+        let inDeck = false;
+        for (let i = 0; i < tplayers[0].subHand.length; i++) {
+          if (
+            tplayers[0].subHand[i].suite === children.props.item.suite &&
+            tplayers[0].subHand[i].value === children.props.item.value
+          ) {
+            inDeck = true;
+          }
+        }
+        console.log('what is inDeck?: ', inDeck);
+        if (!inDeck) {
+          tplayers[0].subHand.push(children.props.item);
+        }
+        console.log('temp player! ', tplayers[0].subHand);
+        runOnJS(setPlayers)(tplayers);
+        console.log('player', players[0].subHand); // children.props.item is what we will want to push to a players subhand
+      } else {
+        // remove from deck... GOOD NIGHT
+      }
     },
   });
   const translateX = useDerivedValue(() => {
