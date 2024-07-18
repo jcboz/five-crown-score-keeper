@@ -112,6 +112,16 @@ function SortableCard({ offsets, index, children, players, setPlayers, container
         console.log('player', players[0].subHand); // children.props.item is what we will want to push to a players subhand
       } else {
         // remove from deck... GOOD NIGHT
+        for (let i = 0; i < tplayers[0].subHand.length; i++) {
+          if (
+            tplayers[0].subHand[i].suite === children.props.item.suite &&
+            tplayers[0].subHand[i].value === children.props.item.value
+          ) {
+            tplayers[0].subHand.splice(children.props.item, 1);
+          }
+        }
+        console.log('temp player! ', tplayers[0].subHand);
+        runOnJS(setPlayers)(tplayers);
       }
     },
   });
