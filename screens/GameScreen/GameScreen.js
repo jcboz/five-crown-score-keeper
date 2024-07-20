@@ -8,6 +8,7 @@ import Card from '../../components/Card/Card';
 import PlayerView from '../../components/PlayerView/PlayerView';
 import canGoOut from './canGoOut';
 import deck from './deck';
+import isSubhandValid from './GameLogic';
 import styles from './styles';
 
 export default function GameScreen() {
@@ -21,7 +22,6 @@ export default function GameScreen() {
   const [readyToDeal, setReadyToDeal] = useState(true);
   const [faceUpCard, setFaceUpCard] = useState(null);
   const [tlayout, setLayout] = useState([]);
-  const [subHandValid, setSubHandValid] = useState(false);
 
   function initPlayers() {
     const players = [];
@@ -78,10 +78,10 @@ export default function GameScreen() {
   }
 
   function checkHand() {
-    if (subHandValid) {
-      console.log('you can go out!');
+    if (isSubhandValid(players[0], round)) {
+      console.log('From GameScreen: you can go out!');
     } else {
-      console.log("You can't go out");
+      console.log("From GameScreen: you can't go out");
     }
     console.log('players: ', players[0]);
   }
