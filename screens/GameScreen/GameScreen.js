@@ -30,6 +30,7 @@ export default function GameScreen() {
   const [tlayoutThree, setLayoutThree] = useState([]);
   const [tlayoutFour, setLayoutFour] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [playerTurnCounter, setPlayerTurnCounter] = useState(0);
 
   function initPlayers() {
     const players = [];
@@ -83,15 +84,23 @@ export default function GameScreen() {
     t.push(faceUpCard);
     setDiscardPile(t);
     setFaceUpCard(null);
+    setPlayerTurnCounter(0);
+  }
+
+  function showNextPlayer() {
+    console.log('hello: ', playerTurnCounter);
+    const t = playerTurnCounter + 1;
+    setPlayerTurnCounter(t);
+    console.log('goodbye: ', t);
   }
 
   function checkHand() {
-    if (isSubhandValid(players[0], round)) {
+    if (isSubhandValid(players[playerTurnCounter], round)) {
       console.log('From GameScreen: you can go out!');
     } else {
       console.log("From GameScreen: you can't go out");
     }
-    console.log('players: ', players[0]);
+    console.log('players from checkHand: ', players[playerTurnCounter]);
   }
 
   function getFaceUpCard() {
@@ -165,9 +174,15 @@ export default function GameScreen() {
           <Pressable onPress={() => deal()} style={styles.button}>
             <Text style={styles.buttonText}>Deal Cards</Text>
           </Pressable>
-          <Pressable onPress={() => newRound()} style={styles.button}>
-            <Text style={styles.buttonText}>Next Round</Text>
-          </Pressable>
+          {players[players.length - 1].id === playerTurnCounter ? (
+            <Pressable onPress={() => newRound()} style={styles.button}>
+              <Text style={styles.buttonText}>Next Round</Text>
+            </Pressable>
+          ) : (
+            <Pressable onPress={() => showNextPlayer()} style={styles.button}>
+              <Text style={styles.buttonText}>Next Player</Text>
+            </Pressable>
+          )}
           <Pressable onPress={() => checkHand()} style={styles.button}>
             <Text style={styles.buttonText}>Check Subhand</Text>
           </Pressable>
@@ -221,6 +236,7 @@ export default function GameScreen() {
           players={players}
           setPlayers={setPlayers}
           round={round + 2}
+          playerTurnCounter={playerTurnCounter}
           layout={tlayout}
           layoutTwo={tlayoutTwo}
           layoutThree={tlayoutThree}

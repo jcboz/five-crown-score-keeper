@@ -4,8 +4,8 @@ import { Text, View } from 'react-native';
 import styles from './styles';
 
 export default function Card(card) {
-  console.log('arkkkkk: ', card);
-  console.log('card from Card: ', card.item.value);
+  // console.log('arkkkkk: ', card);
+  // console.log('card from Card: ', card.item.value);
   let color = 'pink';
   if (card.item.suite === 'club') {
     color = 'green';
