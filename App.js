@@ -8,6 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import AnimatedAppLoader from './components/AnimatedAppLoader/AnimatedAppLoader';
 import GameScreen from './screens/GameScreen/GameScreen';
@@ -16,6 +17,10 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen/SettingsScreen';
 import StartScreen from './screens/StartScreen/StartScreen';
 import styles from './styles';
+
+EStyleSheet.build({
+  // always call EStyleSheet.build() even if you don't use global variables!
+});
 
 SplashScreen.preventAutoHideAsync();
 

@@ -45,6 +45,10 @@ function SortableCard({ offsets, index, children, players, setPlayers, container
     onActive: ({ translationX, translationY }, ctx) => {
       translation.x.value = ctx.x + translationX;
       translation.y.value = ctx.y + translationY;
+      // i think in one of these conditionals is where the crash is happening on first card move
+      // THIS IS WHERE WE DETERMINE WHERE THE CARD AUTO-DRAGS TO...
+      // for some reason the width value changes for each card ... for example for the first card in the hand it will have the correct boundaries but for the other cards they won't auto-drag to the subhand
+      // ^^^OKAY THE REASON*** is because it calculates it by using the card's starting position so the cards after the first card having a greater than 0 x value because they load in further right
       if (isInBank.value && translation.y.value < SENTENCE_HEIGHT) {
         offset.order.value = lastOrder(offsets);
         calculateLayout(offsets, containerWidth);
@@ -58,6 +62,12 @@ function SortableCard({ offsets, index, children, players, setPlayers, container
         if (i === index && o.order.value !== -1) {
           continue;
         }
+        console.log(
+          '***check these out***: \no.x.value: ',
+          o.x.value,
+          '\no.width.value: ',
+          o.width.value,
+        );
         if (
           between(translation.x.value, o.x.value, o.x.value + o.width.value) &&
           between(translation.y.value, o.y.value - CARD_HEIGHT, o.y.value + CARD_HEIGHT)
@@ -72,28 +82,49 @@ function SortableCard({ offsets, index, children, players, setPlayers, container
       }
     },
     onEnd: ({ velocityX, velocityY }) => {
+      // all code from here to 'isGestureActive' is responsible for animating the card to the correct spot, only UI. Location calc is not here
       isAnimating.value = true;
-      translation.x.value = withSpring(
-        offset.x.value,
-        { velocity: velocityX },
-        () => (isAnimating.value = false),
-      );
-      translation.y.value = withSpring(offset.y.value, { velocity: velocityY });
+      translation.x.value = withSpring(offset.x.value, { velocity: 0.2 });
+      translation.y.value = withSpring(offset.y.value, { velocity: 0.2 });
       isGestureActive.value = false;
-      // console.log('offsets: ', offset);
-      // console.log('offset: ', offset.order.value);
-      // console.log('children: ', children.props);
+      console.log('offsets: ', offset);
+      console.log('offset: ', offset.order.value);
+      console.log('children: ', children.props);
       const tplayers = players;
       if (
-        between(translation.x.value, offset.x.value, offset.x.value + offset.width.value) &&
+        between(translation.x.value, offset.x.value / 2, offset.x.value / 2 + offset.width.value) &&
         between(translation.y.value, offset.y.value - CARD_HEIGHT, offset.y.value)
       ) {
         // Here add the cards into the player's subhand. Make sure to take them out when they are moved out. In GameView, a function will need to check the values of the player's subhands
         // setPlayers([...players], players[???]); // i think we could pass the player index based on who's turn it is... is there a turn keeper yet?
         //
-        console.log('card: ', children.props.item);
-        console.log('subhand', tplayers[0].subHand[0]);
-        console.log('index', tplayers[0].subHand.indexOf(children.props.item));
+        // console.log('card: ', children.props.item);
+        // console.log('subhand', tplayers[0].subHand[0]);
+        // console.log('index', tplayers[0].subHand.indexOf(children.props.item));
+        let inDeck = false;
+        for (let i = 0; i < tplayers[0].subHand.length; i++) {
+          if (
+            tplayers[0].subHand[i].suite === children.props.item.suite &&
+            tplayers[0].subHand[i].value === children.props.item.value
+          ) {
+            inDeck = true;
+          }
+        }
+        console.log('what is inDeck?: ', inDeck);
+        if (!inDeck) {
+          tplayers[0].subHand.push(children.props.item);
+        }
+        console.log('temp player! ', tplayers[0].subHand);
+        runOnJS(setPlayers)(tplayers);
+        console.log('player', players[0].subHand); // children.props.item is what we will want to push to a players subhand
+      } else if (
+        between(translation.x.value, offset.x.value, offset.x.value + offset.width.value) &&
+        between(translation.y.value, offset.y.value - CARD_HEIGHT, offset.y.value)
+      ) {
+        console.log('gooba dooba test');
+        // console.log('card: ', children.props.item);
+        // console.log('subhand', tplayers[0].subHand[1]);
+        // console.log('index', tplayers[0].subHand.indexOf(children.props.item));
         let inDeck = false;
         for (let i = 0; i < tplayers[0].subHand.length; i++) {
           if (
@@ -129,20 +160,20 @@ function SortableCard({ offsets, index, children, players, setPlayers, container
     if (isGestureActive.value) {
       return translation.x.value;
     }
-    return withSpring(isInBank.value ? offset.originalX.value - MARGIN_LEFT : offset.x.value);
+    return withSpring(isInBank.value ? offset.originalX.value - MARGIN_LEFT : offset.x.value); // this second value here is what determines where the card should move to
   });
   const translateY = useDerivedValue(() => {
     if (isGestureActive.value) {
       return translation.y.value;
     }
-    return withSpring(isInBank.value ? offset.originalY.value + MARGIN_TOP : offset.y.value);
+    return withSpring(isInBank.value ? offset.originalY.value + MARGIN_TOP : offset.y.value); // TO-DO change here too
   });
   const style = useAnimatedStyle(() => {
     return {
       position: 'absolute',
       top: 0,
       left: 0,
-      zIndex: isGestureActive.value || isAnimating.value ? 100 : 0,
+      zIndex: isGestureActive.value || isAnimating.value ? 100 : offset.z.value,
       width: offset.width.value,
       height: CARD_HEIGHT,
       transform: [{ translateX: translateX.value }, { translateY: translateY.value }],

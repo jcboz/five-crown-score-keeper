@@ -18,7 +18,6 @@ export default function PlayerView({ players, setPlayers, layout, round }) {
   if (players[0].hand.length > 0) {
     return (
       <GestureHandlerRootView style={styles.container}>
-        <Text style={styles.text}>{players[0].name}, your cards are:</Text>
         <View style={styles.cards}>
           <CardList players={players} setPlayers={setPlayers}>
             {players[0].hand.map((item) => (
@@ -31,7 +30,6 @@ export default function PlayerView({ players, setPlayers, layout, round }) {
   }
   return (
     <GestureHandlerRootView style={styles.container}>
-      <Text style={styles.text}>{players[0].name}, your cards are:</Text>
       <View style={styles.cards} />
     </GestureHandlerRootView>
   );

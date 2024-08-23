@@ -21,27 +21,29 @@ export default function CardList({ children, players, setPlayers }) {
     y: useSharedValue(0),
     originalX: useSharedValue(0),
     originalY: useSharedValue(0),
+    z: useSharedValue(0),
+    originalZ: useSharedValue(0),
   }));
 
   if (!ready) {
     return (
       <View style={styles.row}>
         {children.map((child, index) => {
-          console.log('I have no idea');
           return (
             <View
               key={child.key}
               onLayout={({
                 nativeEvent: {
-                  layout: { x, y, width, height },
+                  layout: { x, y, width, height }, // these give the original layout positions of the cards (and their sizes) when loaded in
                 },
               }) => {
                 const offset = offsets[index];
                 offset.order.value = -1;
-                offset.width.value = width;
+                offset.width.value = width / children.length + 10;
                 offset.height.value = height;
                 offset.originalX.value = x;
                 offset.originalY.value = y;
+                offset.originalZ.value = index;
                 runOnUI(() => {
                   'worklet';
 

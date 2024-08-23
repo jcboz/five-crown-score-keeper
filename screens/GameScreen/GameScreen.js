@@ -3,8 +3,12 @@ import { useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import Modal from 'react-native-modal';
 
 import Card from '../../components/Card/Card';
+import HelpButton from '../../components/HelpButton/HelpButton';
+import { MARGIN_LEFT } from '../../components/Layout';
 import PlayerView from '../../components/PlayerView/PlayerView';
 import canGoOut from './canGoOut';
 import deck from './deck';
@@ -22,6 +26,10 @@ export default function GameScreen() {
   const [readyToDeal, setReadyToDeal] = useState(true);
   const [faceUpCard, setFaceUpCard] = useState(null);
   const [tlayout, setLayout] = useState([]);
+  const [tlayoutTwo, setLayoutTwo] = useState([]);
+  const [tlayoutThree, setLayoutThree] = useState([]);
+  const [tlayoutFour, setLayoutFour] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   function initPlayers() {
     const players = [];
@@ -86,6 +94,16 @@ export default function GameScreen() {
     console.log('players: ', players[0]);
   }
 
+  function getFaceUpCard() {
+    const upcard = { item: { suite: faceUpCard.suite, value: faceUpCard.value } };
+    console.log('Deck is (check if face up card is in here): ', currentDeck);
+    return <Card {...upcard} />;
+  }
+
+  function handleModalBackdropPress() {
+    setShowModal(false);
+  }
+
   return (
     <LinearGradient
       colors={['#5b1190', '#6c24aa', '#905fc3']}
@@ -93,18 +111,56 @@ export default function GameScreen() {
       end={{ x: 0, y: 1 }}
       style={{ flex: 1 }}>
       <View style={styles.outerContainer}>
-        <Text style={styles.text}>
-          It is round {round}. Wilds are: {round + 2}'s. There are {currentDeck.length} cards left.
-          {'\n'}The deck is:{'\n'}
-          {currentDeck.map((card) => card.value + ' of ' + card.suite + 's, ')}
-          {'\n'}
-          {'\n'}The discard Pile ({discardPile.length}) is:{'\n'}
-          {discardPile.map((card) => card.value + ' of ' + card.suite + 's, ')}
-        </Text>
-        <Text style={styles.textFaceUpCard}>
-          The face up card is{' '}
-          {faceUpCard !== null ? faceUpCard.value + ' of ' + faceUpCard.suite : ''}
-        </Text>
+        <HelpButton showModal={showModal} setShowModal={setShowModal} />
+        {showModal ? (
+          <Modal
+            isVisible={showModal}
+            onBackdropPress={() => handleModalBackdropPress()}
+            animationIn={'bounceIn'}
+            animationOut={'bounceOut'}
+            style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <View style={styles.modalContainer}>
+              <Text style={{ fontSize: 44, textAlign: 'center' }}> Help is on the way!</Text>
+            </View>
+          </Modal>
+        ) : (
+          ''
+        )}
+        <View style={styles.deckAndFaceUpCardContainer}>
+          {currentDeck.length > 20
+            ? currentDeck.slice(0, currentDeck.length / 3).map((card, index) => (
+                <View
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={card.suite + card.value + index}
+                  onLayout={(event) => {
+                    const { x, y, width, height } = event.nativeEvent.layout;
+                  }}
+                  style={[styles.deckContainer, { marginTop: -index * 2 }]}>
+                  <LinearGradient
+                    colors={['#905FC3', '#452D5D']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0, y: 1 }}
+                    style={{ flex: 1, borderColor: '#E7C721', borderRadius: 10 }}
+                  />
+                </View>
+              ))
+            : currentDeck.map((card, index) => (
+                <View style={[styles.deckContainer, { marginTop: -index * 2, marginLeft: -83.33 }]}>
+                  <View
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={card.suite + card.value + index}
+                    style={styles.deck}>
+                    <LinearGradient
+                      colors={['#905FC3', '#452D5D']}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 0, y: 1 }}
+                      style={{ flex: 1, borderColor: 'red', borderRadius: 10 }}
+                    />
+                  </View>
+                </View>
+              ))}
+          {<View style={styles.faceUpCard}>{faceUpCard !== null ? getFaceUpCard() : ''}</View>}
+        </View>
         <View style={styles.container}>
           <Pressable onPress={() => deal()} style={styles.button}>
             <Text style={styles.buttonText}>Deal Cards</Text>
@@ -121,10 +177,44 @@ export default function GameScreen() {
             event.target.measure((x, y, width, height, pageX, pageY) => {
               const t = tlayout;
               t.push({ x, y, width, height, pageX, pageY });
+              console.log('subhand one: ', t);
               setLayout(t);
             });
           }}
-          style={styles.subHand}
+          style={styles.subHandOne}
+        />
+        <View
+          onLayout={(event) => {
+            event.target.measure((x, y, width, height, pageX, pageY) => {
+              const t = tlayoutTwo;
+              t.push({ x, y, width, height, pageX, pageY });
+              console.log('subhand two: ', t);
+              setLayoutTwo(t);
+            });
+          }}
+          style={styles.subHandTwo}
+        />
+        <View
+          onLayout={(event) => {
+            event.target.measure((x, y, width, height, pageX, pageY) => {
+              const t = tlayoutThree;
+              t.push({ x, y, width, height, pageX, pageY });
+              console.log('subhand Three: ', t);
+              setLayoutThree(t);
+            });
+          }}
+          style={styles.subHandThree}
+        />
+        <View
+          onLayout={(event) => {
+            event.target.measure((x, y, width, height, pageX, pageY) => {
+              const t = tlayoutFour;
+              t.push({ x, y, width, height, pageX, pageY });
+              console.log('subhand Four: ', t);
+              setLayoutFour(t);
+            });
+          }}
+          style={styles.subHandFour}
         />
         <PlayerView
           style={styles.playerView}
@@ -132,6 +222,9 @@ export default function GameScreen() {
           setPlayers={setPlayers}
           round={round + 2}
           layout={tlayout}
+          layoutTwo={tlayoutTwo}
+          layoutThree={tlayoutThree}
+          layoutFour={tlayoutFour}
         />
       </View>
     </LinearGradient>

@@ -15,7 +15,6 @@ function SubHands() {
             top: index * CARD_HEIGHT - 2,
             width: '100%',
             height: 124,
-            backgroundColor: 'yellow',
             opacity: 0.5,
             borderRadius: 10,
           }}

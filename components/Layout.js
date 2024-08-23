@@ -8,6 +8,8 @@ export const NUMBER_OF_SUBHANDS = 1;
 export const CARD_HEIGHT = 120;
 export const CARD_WIDTH = 85;
 export const SENTENCE_HEIGHT = (NUMBER_OF_SUBHANDS - 1) * CARD_HEIGHT;
+export const SIDE_OF_SCREEN_TO_SUBHAND_MARGIN = 10;
+export const SIDE_OF_SUBHAND_TO_CARD = 5;
 
 const isNotInBank = (offset) => {
   'worklet';
@@ -43,6 +45,7 @@ export const reorder = (input, from, to) => {
   const offsets = input.filter(isNotInBank).sort(byOrder);
   const newOffset = move(offsets, from, to);
   newOffset.map((offset, index) => (offset.order.value = index));
+  // newOffset.reverse().map((offset, index) => (offset.z.value = index + 100));
 };
 
 export const calculateLayout = (input, containerWidth) => {
@@ -54,6 +57,7 @@ export const calculateLayout = (input, containerWidth) => {
   }
   let lineNumber = 0;
   let lineBreak = 0;
+  console.log('containerWidth: ', containerWidth);
   offsets.forEach((offset, index) => {
     const total = offsets.slice(lineBreak, index).reduce((acc, o) => acc + o.width.value, 0);
     if (total + offset.width.value > containerWidth) {
@@ -61,8 +65,8 @@ export const calculateLayout = (input, containerWidth) => {
       lineBreak = index;
       offset.x.value = 0;
     } else {
-      offset.x.value = total + 47;
+      offset.x.value = total + SIDE_OF_SCREEN_TO_SUBHAND_MARGIN + SIDE_OF_SUBHAND_TO_CARD;
     }
-    offset.y.value = CARD_HEIGHT * lineNumber - 168;
+    offset.y.value = CARD_HEIGHT * lineNumber - 160;
   });
 };
