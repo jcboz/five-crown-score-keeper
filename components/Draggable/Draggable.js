@@ -71,11 +71,9 @@ function Draggable({ children, positions, round, id, layout }) {
   });
 
   const animatedStyle = useAnimatedStyle(() => {
-    const zIndex = isGestureActive.value ? 100 : 1;
     const scale = isGestureActive.value ? 1.1 : 1;
     return {
       position: 'absolute',
-      zIndex,
       transform: [{ translateX: translateX.value }, { translateY: translateY.value }, { scale }],
     };
   });

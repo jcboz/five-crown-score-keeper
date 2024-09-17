@@ -58,7 +58,7 @@ function PlayerSelector() {
     nameList.map((names) => {
       nameArr.push(names);
     });
-    console.log('nameArr: ', nameArr);
+    // console.log('nameArr: ', nameArr);
     if (nameArr.length >= 2 && path === 0) navigation.navigate('Home', { names: nameArr });
     else if (nameArr.length >= 2 && path === 1) navigation.navigate('Game', { names: nameArr });
     else Alert.alert('You must enter at least 2 players!');

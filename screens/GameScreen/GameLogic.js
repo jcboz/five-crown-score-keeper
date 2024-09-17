@@ -1,20 +1,21 @@
-export default function isSubhandValid(player, round) {
+export default function isSubhandValid(subHand, round) {
   // 1. Check that there are >= 3 cards in each of the subhands
-  for (let i = 0; i < player.subHand.length; i++) {
-    if (player.subHand.length < 3) {
-      console.log('Pilez must be at least 3 cards!');
+  for (let i = 0; i < subHand.length; i++) {
+    if (subHand.length > 0 && subHand.length < 3) {
+      // console.log('Pilez must be at least 3 cards!');
       return false;
     }
   }
 
+  // DEPRECATED - this is no longer needed because we are going to individually pass each subhand in to this file
   // 2. Check that all card in player's hand are in subhands (Check that length of each subHand array combined is equal to length of cards in player's hand)
-  if (player.subHand.length < player.hand.length) {
-    console.log('not all cards used!');
-    return false;
-  }
+  // if (player.subHand.length < player.hand.length) {
+  //   console.log('not all cards used!');
+  //   return false;
+  // }
 
   // 3. Check that the subhand is a book or a run and return true (isBook || isRun) where is isBook and isRun are helper functions
-  if (isBook(player.subHand, round) || isRun(player.subHand, round)) {
+  if (isBook(subHand, round) || isRun(subHand, round)) {
     return true;
   }
 
@@ -84,13 +85,18 @@ function isRun(subhand, round) {
   for (let i = 0; i < hand.length; i++) {
     if (hand[i].value === 'joker' || hand[i].value === wild) {
       wildCards.push(hand[i]);
+      hand.splice(i, 1);
     }
   }
 
-  for (let i = 0; i < wildCards.length; i++) {
-    hand.splice(wildCards[i], 1);
-  }
-
+  // console.log('before splicing the hand is: ', hand);
+  // for (let i = 0; i < wildCards.length; i++) {
+  //   // hand.splice(wildCards[i], 1) makes no sense this is not how splice works. The first param is the index to remove
+  //   hand.splice(wildCards[i], 1);
+  // }
+  console.log('wildcards are: ', wildCards);
+  console.log('and the hand is: ', hand); // it looks like the wrong card is being spliced??? check in iterm..
+  // weird joker bug fails here... bug is when joker is used for a run but NOT at the beginning of the subhand. Fails when it is at middle/end
   for (let i = 0; i < hand.length - 1; i++) {
     if (hand[i].suite !== hand[i + 1].suite) {
       console.log('it is not a run :( not even in the same suite!');

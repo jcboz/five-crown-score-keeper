@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Pressable, Text, TextInput, View } from 'react-native';
 
@@ -5,21 +6,7 @@ import styles from './styles';
 
 // I think that calculate function needs to be it's own function and there is a useRef for what is currently in each textput input and then they are all added up each time, not just one grand total variable that is added to.
 
-// eslint-disable-next-line react/prop-types
-export default function Scorecard({
-  // eslint-disable-next-line react/prop-types
-  playerName,
-  // eslint-disable-next-line react/prop-types
-  index,
-  // eslint-disable-next-line react/prop-types
-  showScore,
-  // eslint-disable-next-line react/prop-types
-  testFunc,
-  // eslint-disable-next-line react/prop-types
-  scoreFun,
-  // eslint-disable-next-line react/prop-types
-  scoreArr,
-}) {
+export default function Scorecard({ playerName, index, showScore, testFunc, scoreFun, scoreArr }) {
   const [number1, setNumber1] = useState(-1);
   const [number2, setNumber2] = useState(-1);
   const [number3, setNumber3] = useState(-1);

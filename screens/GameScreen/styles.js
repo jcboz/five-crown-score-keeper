@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     height: 116.66,
     marginRight: -83.33,
-    shadowColor: 'black',
+    shadowColor: 'blue',
     shadowOffset: {
-      width: 0,
+      width: 10,
       height: 0.5,
     },
     shadowOpacity: 1,
@@ -61,6 +61,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0.75,
     width: 83.33,
+  },
+  deckContainerHighlight: {
+    shadowColor: 'blue',
+    shadowOffset: {
+      width: 0,
+      height: 0.5,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 0.75,
   },
   faceUpCard: {
     left: '22.5%',

@@ -14,18 +14,21 @@ export const SIDE_OF_SUBHAND_TO_CARD = 5;
 const isNotInBank = (offset) => {
   'worklet';
 
-  return offset.order.value !== -1;
+  // console.log('cheese heeh: ', offset.order);
+  return offset.order !== -1;
 };
 
 const byOrder = (a, b) => {
   'worklet';
 
-  return a.order.value > b.order.value ? 1 : -1;
+  return a.order > b.order ? 1 : -1;
 };
 
 export const lastOrder = (input) => {
   'worklet';
 
+  console.log('\n\nFoo foo foo: ', input);
+  console.log('\n\nFoo foo foo 2: ', input.filter(isNotInBank).length);
   return input.filter(isNotInBank).length;
 };
 
@@ -36,7 +39,7 @@ export const remove = (input, index) => {
     .filter((_, i) => i !== index)
     .filter(isNotInBank)
     .sort(byOrder);
-  offsets.map((offset, i) => (offset.order.value = i));
+  offsets.map((offset, i) => (offset.order = i));
 };
 
 export const reorder = (input, from, to) => {
@@ -44,8 +47,8 @@ export const reorder = (input, from, to) => {
 
   const offsets = input.filter(isNotInBank).sort(byOrder);
   const newOffset = move(offsets, from, to);
-  newOffset.map((offset, index) => (offset.order.value = index));
-  // newOffset.reverse().map((offset, index) => (offset.z.value = index + 100));
+  newOffset.map((offset, index) => (offset.order = index));
+  // newOffset.reverse().map((offset, index) => (offset.z = index + 100));
 };
 
 export const calculateLayout = (input, containerWidth) => {
@@ -57,16 +60,17 @@ export const calculateLayout = (input, containerWidth) => {
   }
   let lineNumber = 0;
   let lineBreak = 0;
-  console.log('containerWidth: ', containerWidth);
+  console.log('input: ', input);
+  // console.log('containerWidth: ', containerWidth);
   offsets.forEach((offset, index) => {
-    const total = offsets.slice(lineBreak, index).reduce((acc, o) => acc + o.width.value, 0);
-    if (total + offset.width.value > containerWidth) {
+    const total = offsets.slice(lineBreak, index).reduce((acc, o) => acc + o.width, 0);
+    if (total + offset.width > containerWidth) {
       lineNumber += 1;
       lineBreak = index;
-      offset.x.value = 0;
+      offset.x = 0;
     } else {
-      offset.x.value = total + SIDE_OF_SCREEN_TO_SUBHAND_MARGIN + SIDE_OF_SUBHAND_TO_CARD;
+      offset.x = total + SIDE_OF_SCREEN_TO_SUBHAND_MARGIN + SIDE_OF_SUBHAND_TO_CARD;
     }
-    offset.y.value = CARD_HEIGHT * lineNumber - 160;
+    offset.y = CARD_HEIGHT * lineNumber - 160;
   });
 };

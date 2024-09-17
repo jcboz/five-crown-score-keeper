@@ -62,10 +62,6 @@ function HomeScreen() {
 
   const [showModal, setShowModal] = useState(false);
 
-  // function showModalFunc() {
-  //   setShowModal(true);
-  // }
-
   function getWinner() {
     const winners = [];
     const winningScore = Math.min(...scoreArr);
@@ -89,7 +85,7 @@ function HomeScreen() {
     }
 
     const messageArr = nameArr.join(', ');
-    console.log('nameArr: ', messageArr);
+    // console.log('nameArr: ', messageArr);
     return messageArr + ' tie!';
   }
 
