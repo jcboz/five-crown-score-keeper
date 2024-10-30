@@ -47,24 +47,6 @@ function SortableCard({
       console.log('offsets check 3: ', offsets.value[index], '************\n\n');
 
       if (isInBank.value) {
-        // console.log(
-        //   'Line 45 values: \n',
-        //   translation.x.value,
-        //   '\n',
-        //   offset.originalX,
-        //   '\n',
-        //   MARGIN_LEFT,
-        //   '\n',
-        //   translation.y.value,
-        //   '\n',
-        //   offset.originalY,
-        //   '\n',
-        //   MARGIN_TOP,
-        //   '\n',
-        //   ctx.x,
-        //   '\n',
-        //   ctx.y,
-        // );
         translation.x.value = offset.originalX - MARGIN_LEFT;
         translation.y.value = offset.originalY + MARGIN_TOP;
       } else {
